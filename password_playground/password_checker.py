@@ -13,14 +13,17 @@ def request_api_data(query_char):
     return response
 
 def get_password_leaks_count(hashes, hash_to_check):
-    hashes = (line.split(':') for line in hashes.text.slpitlines())
+    hashes = (line.split(':') for line in hashes.text.splitlines())
     for hassh, count in hashes:
-        print(hash, count)
+        print(hassh, count)
 
 def pwned_api_check(password):
     # check password if it exists in API response
-    sha1passwd = hashlib.sha1(password.encode('utf-8').hexdigest().upper())
+    sha1passwd = hashlib.sha1(password.encode('utf-8')).hexdigest().upper()
     first5_char, tail = sha1passwd[:5], sha1passwd[5:]
     response = request_api_data(first5_char)
     return get_password_leaks_count(response, tail)
+
+
+pwned_api_check()
 
