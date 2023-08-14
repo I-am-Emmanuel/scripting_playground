@@ -36,6 +36,8 @@ def main(args):
         else:
             print(f'{password} was NOT found. Carry on!')
 
-        return 'done!'
+    return 'done!'
+
+main(sys.argv[1:])
 
 
